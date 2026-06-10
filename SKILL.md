@@ -40,3 +40,20 @@ Load these execution gates precisely when the trigger condition is met:
 
 ## 4. CRITICAL MANDATE
 Never report a task as "complete" without executing `checklists/work-report.md`. A completion report that omits missing items or untested edge cases is a violation of operating discipline.
+
+## 5. OPERATING MODES
+Users can toggle latency vs. safety by setting a mode at the start of a session.
+
+| Mode | Behavior | Use Case |
+| :--- | :--- | :--- |
+| **INTERACTIVE** (Default) | Strict gating. Stop and confirm before every structural change or ambiguity. | Default, high-risk codebases, junior agents. |
+| **AUTONOMOUS** | Gate reduction. Proceed based on stated assumptions. Only stop for `03-removal-feature` or major design choices. | Rapid prototyping, trusted sessions, low-risk changes. |
+
+*Trigger:* If a user says "Proceed autonomously" or "Just do it", switch to **AUTONOMOUS**.
+
+## 6. THE OVERRIDE PROTOCOL
+If a core rule (CORE.md) conflicts with a direct user instruction:
+1. Identify the specific rule (e.g., R16).
+2. State the conflict clearly.
+3. Ask the user to confirm with: **"OVERRIDE [Rule Number]"**.
+4. Once provided, log the override in the final work report and proceed.

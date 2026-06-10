@@ -164,12 +164,13 @@ Never silently change a public interface.
 
 ---
 
-## R15 — Do not rationalize rule violations
+## R15 — Rules are default, Overrides are explicit
 
-No context makes these rules inapplicable.
-Not urgency. Not simplicity. Not "it's just a small change."
-If a rule creates friction, that friction is the rule working correctly.
-The rules exist because every exception compounds into the problems this skill exists to prevent.
+No context makes these rules inapplicable by default. Not urgency. Not simplicity.
+If a rule creates friction that the user explicitly wants to bypass:
+1. State the rule being violated.
+2. Require the **"OVERRIDE [Rule Number]"** command.
+The agent must never "decide" to skip a rule; the user must take explicit responsibility.
 
 ---
 
