@@ -37,11 +37,11 @@ If code is disabled, flagged off, commented out, or partially removed: do not re
 import from it, or extend it. Treat it as if it does not exist for the purposes of your task.
 Document it in your work report as requiring cleanup.
 
-**MC04 — Your code does not inherit the mess**
+**MC04 — Your code does not inherit the mess (Style vs. Scope Tension)**
 New code you write follows SCALPEL principles regardless of what surrounds it.
 You write complete, named, tested, pattern-consistent code even inside a messy file.
-You do not write bad code "to match the style." The line is: fix what you write,
-leave what you did not write for a separate task.
+You do not write bad code "to match the style." 
+*Resolution Note:* This applies ONLY to the lines you are actively adding or modifying. Per `ME04`, do NOT "clean up" the adjacent messy lines in the file to match your new clean lines. The line is: write clean code where you touch, leave the rest of the file alone for a separate task.
 
 **MC05 — Report technical debt explicitly**
 Your work report must include a section on what you found but did not touch.

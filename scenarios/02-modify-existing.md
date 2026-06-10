@@ -31,10 +31,10 @@ Unless the modification explicitly changes behavior, the external behavior of th
 must be identical after the change. Same inputs, same outputs. Same error cases, same side effects.
 If the modification changes behavior, state exactly what changed and confirm this is intended.
 
-**ME04 — Keep the surrounding code untouched**
+**ME04 — Keep the surrounding code untouched (Scope vs. Style Tension)**
 Do not reformat. Do not rename variables. Do not adjust whitespace. Do not change comment style.
-Do not reorganize imports. Touch only what the task requires. The diff of your change should be
-exactly the change — nothing more.
+Do not reorganize imports. Touch only what the task requires. 
+*Resolution Note:* If the file is extremely messy and lacks types/formatting, do NOT rewrite the adjacent messy lines to match your clean code. Write your new code cleanly (per MC04), but leave the surrounding messy lines exactly as they were. The diff should strictly reflect the required change.
 
 **ME05 — Update all consumers of changed interfaces**
 If you change a function's signature, a component's props, a type's shape, or an exported constant's

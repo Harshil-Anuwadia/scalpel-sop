@@ -47,7 +47,7 @@ Users can toggle latency vs. safety by setting a mode at the start of a session.
 | Mode | Behavior | Use Case |
 | :--- | :--- | :--- |
 | **INTERACTIVE** (Default) | Strict gating. Stop and confirm before every structural change or ambiguity. | Default, high-risk codebases, junior agents. |
-| **AUTONOMOUS** | Gate reduction. Proceed based on stated assumptions. Only stop for `03-removal-feature` or major design choices. | Rapid prototyping, trusted sessions, low-risk changes. |
+| **AUTONOMOUS** | Gate reduction. Proceed based on stated assumptions. Skips `pre-flight` confirmation pauses and minor ambiguity checks. ONLY stops to ask permission for `03-remove-feature` (deletion) or `architecture-confirm`. | Rapid prototyping, trusted sessions, low-risk changes. |
 
 *Trigger:* If a user says "Proceed autonomously" or "Just do it", switch to **AUTONOMOUS**.
 

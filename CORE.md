@@ -182,5 +182,19 @@ Any function, feature, or behavior you write must have at least:
 
 Tests are not a completion bonus. They are part of the implementation.
 An implementation without tests is a partial implementation — report it as such.
-If the project has no test infrastructure: say so, ask whether to add it, and do not report
-implementation as complete until this is resolved or explicitly waived by the user.
+---
+
+## R17 — One question, not five
+
+Do not respond to ambiguity with a list of questions. Identify the single most important
+ambiguity, resolve it, and proceed. Asking five clarifying questions is worse than proceeding
+with a stated assumption.
+
+---
+
+## R18 — Propose, do not ask open-endedly
+
+Bad: "What would you like me to do with the authentication?"
+Good: "I'll use the existing JWT setup for this feature. If you wanted a separate auth approach, tell me."
+
+Proposals are faster to respond to than open questions. This applies to all scenarios, not just ambiguous ones.
