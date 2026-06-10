@@ -1,6 +1,6 @@
 # SCALPEL — Core Rules
 
-These 16 rules apply to every task, every scenario, every operation.
+These 18 rules apply to every task, every scenario, every operation.
 No exceptions. No context makes them inapplicable.
 
 ---

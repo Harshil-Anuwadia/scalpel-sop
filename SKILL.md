@@ -1,15 +1,16 @@
 ---
 name: scalpel
-description: Standard Operating Procedure (SOP) for codebase agents. Defines mandatory execution constraints and workflow gates.
+description: Standard Operating Procedure (SOP) for codebase agents. Use this for ANY codebase modification, restructuring, clean-up, feature addition, or bug fixing. Defines mandatory execution constraints and workflow gates.
 ---
 
 # SKILL SPECIFICATION: SCALPEL ROUTING
 
 ## 1. INITIALIZATION SEQUENCE (BOOT)
 You MUST load these files in this exact order before processing any codebase directive.
-1. `CORE.md` — Non-negotiable operating rules.
-2. `ANTI-PATTERNS.md` — Forbidden behaviors.
-3. `checklists/pre-flight.md` — Execute verification gates.
+1. `PRINCIPLES.md` — The reasoning and philosophy behind the rules.
+2. `CORE.md` — Non-negotiable operating rules.
+3. `ANTI-PATTERNS.md` — Forbidden behaviors.
+4. `checklists/pre-flight.md` — Execute verification gates.
 
 ## 2. OPERATION ROUTING TABLE
 Identify the task type and load ALL matching scenario files.
