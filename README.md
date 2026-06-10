@@ -40,7 +40,7 @@ Scalpel is built on four main pieces:
 ## How to use it
 
 1. **Get the files:** 
-   - **For Claude Projects:** [Download the `scalpel-sop.zip` file](https://github.com/Harshil-Anuwadia/scalpel-sop/raw/main/scalpel-sop.zip) and upload it to your project knowledge base.
+   - **For Claude Projects:** [Download the scalpel-sop.zip file](https://github.com/Harshil-Anuwadia/scalpel-sop/raw/main/scalpel-sop.zip) and upload it to your project knowledge base.
    - **For CLI/Local Agents:** Clone this repository into your project or your agent's skills directory.
    ```bash
    git clone https://github.com/Harshil-Anuwadia/scalpel-sop.git
