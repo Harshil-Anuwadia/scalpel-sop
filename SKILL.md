@@ -1,63 +1,42 @@
 ---
 name: scalpel
-description: Enforces operating discipline for codebase agents through modular scenarios, core rules, anti-patterns reference, and pre/post-flight checklists.
+description: Standard Operating Procedure (SOP) for codebase agents. Defines mandatory execution constraints and workflow gates.
 ---
 
-# SCALPEL — Operating Discipline for Codebase Agents
+# SKILL SPECIFICATION: SCALPEL ROUTING
 
-SCALPEL is a set of enforced operating rules for AI agents working on application codebases.
-It exists because unconstrained agents cause collateral damage: zombie code, scope creep,
-silent assumptions, partial implementations, and pattern violations that corrupt the codebase
-for every future session that reads it.
+## 1. INITIALIZATION SEQUENCE (BOOT)
+You MUST load these files in this exact order before processing any codebase directive.
+1. `CORE.md` — Non-negotiable operating rules.
+2. `ANTI-PATTERNS.md` — Forbidden behaviors.
+3. `checklists/pre-flight.md` — Execute verification gates.
 
-You are not the author of this codebase. You are a surgical instrument. You cut only what
-needs cutting, you close everything you open, and you leave nothing behind that was not
-already there.
+## 2. OPERATION ROUTING TABLE
+Identify the task type and load ALL matching scenario files.
 
----
+| Task Category | Trigger / Keywords | File to Load |
+| :--- | :--- | :--- |
+| **New Feature** | "Add", "Create", "Build", "Implement new" | `scenarios/01-new-feature.md` |
+| **Modify Existing** | "Update", "Change", "Extend", "Modify" | `scenarios/02-modify-existing.md` |
+| **Removal** | "Delete", "Remove", "Drop", "Clean up" | `scenarios/03-remove-feature.md` |
+| **Bug Fix** | "Fix", "Debug", "Resolve", "Error", "Failing" | `scenarios/04-debug-fix.md` |
+| **Refactor** | "Refactor", "Restructure", "Clean" (Explicitly) | `scenarios/05-refactor.md` |
+| **Cold Start** | "New project", "Just starting", no prior context | `scenarios/06-new-session.md` |
+| **Ambiguity** | "How should I", Unclear scope, Multiple valid paths | `scenarios/07-ambiguous.md` |
+| **Testing** | "Write tests", "Coverage", "Test suite" | `scenarios/08-write-tests.md` |
+| **Dependencies** | "Upgrade", "Install", "Migrate to", "Bump" | `scenarios/09-dependency-upgrade.md` |
+| **Legacy/Messy** | "Inconsistent", "No tests", "Spaghetti" | `scenarios/10-messy-codebase.md` |
 
-## Always load before any task
+*Conflict Rule: If a task spans multiple categories, load ALL relevant files. Rules combine. In case of conflict, `CORE.md` takes supreme precedence.*
 
-1. This file — read routing table below
-2. `CORE.md` — non-negotiable rules for every operation
-3. `ANTI-PATTERNS.md` — forbidden behaviors, checked before and after every task
-4. `checklists/pre-flight.md` — run before starting work
+## 3. DYNAMIC CHECKLIST GATES
+Load these execution gates precisely when the trigger condition is met:
 
----
+- **Condition:** Before writing any code. -> **Load:** `checklists/pre-flight.md`
+- **Condition:** After deleting any code/file. -> **Load:** `checklists/removal-complete.md`
+- **Condition:** Before making a structural/design choice. -> **Load:** `checklists/architecture-confirm.md`
+- **Condition:** When reporting a task as complete. -> **Load:** `checklists/work-report.md`
+- **Condition:** When a task must continue in a new session. -> **Load:** `checklists/session-handoff.md`
 
-## Scenario routing — load the file that matches your task
-
-| Task | File |
-|------|------|
-| Adding a feature or capability that does not exist yet | `scenarios/01-new-feature.md` |
-| Changing, extending, or updating existing working code | `scenarios/02-modify-existing.md` |
-| Removing a feature, component, route, or any code | `scenarios/03-remove-feature.md` |
-| Finding and fixing a bug or broken behavior | `scenarios/04-debug-fix.md` |
-| Restructuring code without changing behavior (explicit request only) | `scenarios/05-refactor.md` |
-| Starting a session with no prior context about the project | `scenarios/06-new-session.md` |
-| Instruction is unclear, incomplete, or has multiple valid interpretations | `scenarios/07-ambiguous.md` |
-| Writing tests for existing untested code | `scenarios/08-write-tests.md` |
-| Upgrading a dependency or migrating between libraries | `scenarios/09-dependency-upgrade.md` |
-| Working in a codebase that already violates SCALPEL principles | `scenarios/10-messy-codebase.md` |
-
-If a task spans multiple scenarios (e.g. fix a bug AND remove a feature), load all relevant
-scenario files before starting. Apply all rules from all loaded files simultaneously.
-
----
-
-## Load at specific moments
-
-| Moment | Checklist |
-|--------|-----------|
-| Before starting any task | `checklists/pre-flight.md` |
-| After completing any removal | `checklists/removal-complete.md` |
-| Before making any architectural decision | `checklists/architecture-confirm.md` |
-| When reporting work as complete | `checklists/work-report.md` |
-| When a task spans sessions (handoff to next session) | `checklists/session-handoff.md` |
-
----
-
-## The single most important rule (if you read nothing else)
-
-Never report a task as complete without running `checklists/work-report.md`.
-A completion report that omits what is missing is a lie. Lies rot the codebase.
+## 4. CRITICAL MANDATE
+Never report a task as "complete" without executing `checklists/work-report.md`. A completion report that omits missing items or untested edge cases is a violation of operating discipline.
