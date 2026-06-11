@@ -1,4 +1,4 @@
-# SCALPEL: Standard Operating Procedure (SOP) Framework
+# Standard Operating Procedure (SOP) Framework
 
 Scalpel is a set of strict rules and workflows for AI coding agents. It gives them a Standard Operating Procedure (SOP) to follow so they modify your codebase safely, predictably, and without leaving a mess behind.
 
