@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Scalpel Dispatch — Standard Operating Procedure, Vol. I</title>
+<meta name="description" content="A strict instruction set for governing automated coding agents. Eighteen rules. Eleven principles. No exceptions. Volume I.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rye&family=Special+Elite&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+<!-- GSAP dependencies (Lenis removed for native performance) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.7/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.7/ScrollTrigger.min.js"></script>
+
+<!-- Link to external CSS -->
+<link rel="stylesheet" href="scalpel2.css">
+</head>
+<body>
+  <!-- ─── Advanced Paper Grunge ─── -->
+  <div class="paper-grunge" aria-hidden="true"></div>
+
+<!-- Custom Cursor Elements -->
+<div class="cursor-dot" aria-hidden="true"></div>
+<div class="cursor-ring" aria-hidden="true"></div>
+
+<!-- Floating Dust Canvas -->
+<canvas class="dust-canvas" aria-hidden="true"></canvas>
+
+<!-- Film grain -->
+<div class="grain-overlay" aria-hidden="true"></div>
+
+<!-- Scroll progress (mercury column) -->
+<div class="scroll-progress" aria-hidden="true"></div>
+
+<!-- Wrapper to prevent body transform bugs -->
+<div id="page-wrapper">
+
+<!-- ═══════════ MASTHEAD ═══════════ -->
+<header class="masthead">
+  <div class="mast-dateline">
+    <span>Vol. I &nbsp;·&nbsp; No. 1</span>
+    <span>✦&nbsp; Open Source · Apache 2.0 &nbsp;✦</span>
+    <span></span>
+  </div>
+  <div class="mast-center">
+    <h1 class="mast-publication">The Scalpel Dispatch</h1>
+    <div class="mast-subline"><span>Standard Operating Procedure for Coding Agents</span></div>
+  </div>
+  <nav>
+    <a href="#problem">The Problem</a>
+    <a href="#workflow">Workflow</a>
+    <a href="#principles">Principles</a>
+    <a href="#rules">Rules</a>
+    <a href="#modes">Modes</a>
+    <a href="#start">Get Started</a>
+  </nav>
+</header>
+
+<!-- ═══════════ BROADSIDE ═══════════ -->
+<div class="broadside">
+  <div class="w">
+    <span class="brd-ornament">✦ &nbsp; ✦ &nbsp; ✦</span>
+    <span class="brd-announce">Presenting to the Trade</span>
+    <h2 class="brd-title">Scalpel</h2>
+    <div class="brd-rule"></div>
+    <p class="brd-desc">A strict instruction set that teaches coding agents to work like a disciplined senior engineer — reading before writing, staying in scope, finishing completely.</p>
+    <p class="brd-link">Repository &nbsp;·&nbsp; <a href="https://github.com/Harshil-Anuwadia/scalpel-sop" target="_blank">github.com/Harshil-Anuwadia/scalpel-sop</a></p>
+  </div>
+</div>
+
+<!-- ═══════════ PREAMBLE ═══════════ -->
+<div class="w">
+  <div class="preamble">
+    <p>Scalpel is a collection of markdown files that act as an instruction manual for automated coding agents. Before the agent is allowed to write any code, it has to read the Scalpel rules. These rules force the agent to act like a disciplined senior engineer: reading files before changing them, confirming assumptions, and sticking exactly to the scope of the task you gave it. Without a governing framework, agents are unpredictable — they guess file layouts from convention, expand their scope into changes you never requested, and report "Done!" while leaving half the work unfinished.</p>
+    <p>This document is the canonical reference. It contains <span class="counter" data-target="18">0</span> enforceable rules, <span class="counter" data-target="11">0</span> grounding principles, two operating modes, and a five-step execution workflow. The procedures herein apply to every task, every scenario, every operation — no context makes them inapplicable. Not urgency. Not simplicity. Not the size of the change.</p>
+  </div>
+</div>
+
+<div class="divider reveal-fade">— ❦ —</div>
+
+<div class="w" style="position:relative;">
+  <!-- Live Coffee Splash Effect -->
+  <div class="live-coffee-splash" aria-hidden="true">
+    <div class="coffee-drop"></div>
+    <div class="coffee-splatter-svg">
+      <svg viewBox="-20 -20 240 240" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <filter id="coffee-distortion" x="-20%" y="-20%" width="140%" height="140%">
+            <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="3" result="noise" />
+            <feDisplacementMap in="SourceGraphic" in2="noise" scale="12" xChannelSelector="R" yChannelSelector="G" result="distorted" />
+            <feGaussianBlur in="distorted" stdDeviation="0.8" result="blurred" />
+            <feComponentTransfer in="blurred">
+              <feFuncA type="linear" slope="1.5" intercept="-0.1" />
+            </feComponentTransfer>
+          </filter>
+        </defs>
+        <g filter="url(#coffee-distortion)">
+          <!-- Inner light wash -->
+          <path fill="rgba(100, 50, 15, 0.12)" d="M100,20 C145,15 185,50 185,95 C185,140 145,185 100,180 C50,175 15,135 15,90 C15,45 55,25 100,20 Z" />
+          <!-- Dark capillary edge rings -->
+          <path fill="none" stroke="rgba(70, 30, 10, 0.5)" stroke-width="4" d="M100,20 C145,15 185,50 185,95 C185,140 145,185 100,180 C50,175 15,135 15,90 C15,45 55,25 100,20 Z" />
+          <path fill="none" stroke="rgba(50, 15, 5, 0.4)" stroke-width="2" d="M98,22 C140,18 180,52 180,95 C180,138 140,180 98,175 C52,170 18,132 18,90 C18,48 52,28 98,22 Z" />
+          <!-- Second overlapping cup ring -->
+          <path fill="rgba(80, 30, 10, 0.08)" stroke="rgba(60, 20, 5, 0.45)" stroke-width="3" d="M110,40 C140,35 165,60 165,95 C165,130 140,160 110,155 C75,150 45,120 45,90 C45,55 75,45 110,40 Z" />
+          <!-- Splatters -->
+          <path fill="rgba(60, 25, 10, 0.4)" d="M185,95 Q205,80 215,105 Q195,125 185,110 Z" />
+          <path fill="rgba(60, 25, 10, 0.4)" d="M100,180 Q110,200 90,210 Q75,190 90,178 Z" />
+          <path fill="rgba(60, 25, 10, 0.4)" d="M20,60 Q-5,45 5,30 Q25,35 25,55 Z" />
+          <circle cx="195" cy="140" r="5" fill="rgba(70, 30, 10, 0.45)" />
+          <circle cx="180" cy="170" r="3" fill="rgba(70, 30, 10, 0.55)" />
+          <circle cx="160" cy="190" r="7" fill="rgba(60, 20, 5, 0.35)" />
+          <circle cx="130" cy="205" r="2.5" fill="rgba(70, 30, 10, 0.5)" />
+          <circle cx="30" cy="180" r="6" fill="rgba(70, 30, 10, 0.4)" />
+          <circle cx="5" cy="150" r="4" fill="rgba(50, 15, 5, 0.5)" />
+          <circle cx="5" cy="20" r="5.5" fill="rgba(70, 30, 10, 0.4)" />
+          <circle cx="45" cy="-5" r="2.5" fill="rgba(50, 15, 5, 0.5)" />
+          <circle cx="85" cy="-10" r="4" fill="rgba(60, 20, 5, 0.4)" />
+          <circle cx="205" cy="120" r="2" fill="rgba(50, 15, 5, 0.5)" />
+          <circle cx="190" cy="20" r="3" fill="rgba(50, 15, 5, 0.4)" />
+          <circle cx="-5" cy="90" r="2" fill="rgba(50, 15, 5, 0.5)" />
+        </g>
+      </svg>
+    </div>
+    <div class="coffee-drip drip-1"></div>
+    <div class="coffee-drip drip-2"></div>
+    <div class="coffee-drip drip-3"></div>
+  </div>
+  <div class="fold-mark" style="top: 280px;" aria-hidden="true"></div>
+</div>
+
+<!-- ═══════════ THE PROBLEM ═══════════ -->
+<section id="problem">
+  <div class="w">
+    <span class="sec-label reveal">§ I. &nbsp; The Problem</span>
+    <h2 class="reveal">Why Agents Break Your Codebase</h2>
+    <p class="sec-intro reveal">Without a framework, coding agents are unpredictable. Here is what goes wrong.</p>
+
+    <div class="problems">
+      <div class="problem">
+        <span class="pnum">No. I</span>
+        <h3>Zombie Code</h3>
+        <p>You ask the agent to delete a feature. It removes the main file and leaves broken imports, orphaned types, and dead database models scattered behind.</p>
+      </div>
+      <div class="problem">
+        <span class="pnum">No. II</span>
+        <h3>Unwanted Refactoring</h3>
+        <p>The agent expands its scope. A CSS bug fix becomes a rewrite of your auth logic. Changes you never asked for land silently in your diff.</p>
+      </div>
+      <div class="problem">
+        <span class="pnum">No. III</span>
+        <h3>Hallucinated Structure</h3>
+        <p>The agent assumes you use a library because it is popular, or guesses your file layout from framework defaults — without reading your actual codebase.</p>
+      </div>
+      <div class="problem">
+        <span class="pnum">No. IV</span>
+        <h3>Silent Failures</h3>
+        <p>The agent reports "Done!" but skipped the hard parts, wrote no tests, and left three edge cases unhandled. You find this out in production.</p>
+      </div>
+    </div>
+
+    <p class="ledger-caption reveal" style="margin-top:32px;">Exhibit A — Comparative Behaviour</p>
+    <div class="ledger reveal">
+      <table>
+        <thead>
+          <tr>
+            <th>Scenario</th>
+            <th>Without Scalpel</th>
+            <th>With Scalpel</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Reading Code</td>
+            <td class="bad">Guesses what is in a file from its name.</td>
+            <td class="good">Reads the actual file and its dependencies before doing anything.</td>
+          </tr>
+          <tr>
+            <td>Deleting Code</td>
+            <td class="bad">Deletes the main file, leaves broken imports everywhere.</td>
+            <td class="good">Removes the feature, its tests, types, routes, and every import.</td>
+          </tr>
+          <tr>
+            <td>Scope</td>
+            <td class="bad">Expands scope to fix adjacent "messy" code.</td>
+            <td class="good">Touches only what was explicitly requested.</td>
+          </tr>
+          <tr>
+            <td>Reporting</td>
+            <td class="bad">"Done! Everything works."</td>
+            <td class="good">States what was built, what was skipped, what edge cases remain.</td>
+          </tr>
+          <tr>
+            <td>Emergencies</td>
+            <td class="bad">Refuses to break practices even when you are in a hurry.</td>
+            <td class="good">Allows explicit rule overrides with the OVERRIDE command.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<div class="divider reveal-fade">· · ·</div>
+
+<!-- ═══════════ WORKFLOW ═══════════ -->
+<section id="workflow">
+  <div class="w">
+    <span class="sec-label reveal">§ I½. &nbsp; The Pipeline</span>
+    <h2 class="reveal">How the Workflow Runs</h2>
+    <p class="sec-intro reveal">When you give the agent a task under Scalpel, here is what it does behind the scenes. Five stages, one discipline.</p>
+
+    <div class="workflow-steps">
+      <div class="wf-step">
+        <div class="wf-num">I</div>
+        <div class="wf-name">Initialize</div>
+        <div class="wf-desc">Loads SKILL.md, CORE.md, and ANTI-PATTERNS.md to learn the rules of the road.</div>
+      </div>
+      <div class="wf-step">
+        <div class="wf-num">II</div>
+        <div class="wf-name">Pre-Flight</div>
+        <div class="wf-desc">Runs the pre-flight checklist to understand the request and the codebase.</div>
+      </div>
+      <div class="wf-step">
+        <div class="wf-num">III</div>
+        <div class="wf-name">Route</div>
+        <div class="wf-desc">Determines the task type and loads the matching scenario instructions.</div>
+      </div>
+      <div class="wf-step">
+        <div class="wf-num">IV</div>
+        <div class="wf-name">Execute</div>
+        <div class="wf-desc">Performs the work, following core rules at every step.</div>
+      </div>
+      <div class="wf-step">
+        <div class="wf-num">V</div>
+        <div class="wf-name">Report</div>
+        <div class="wf-desc">Delivers an honest breakdown of what was finished and what remains.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider reveal-fade">— ❦ —</div>
+
+<!-- ═══════════ PRINCIPLES ═══════════ -->
+<section id="principles">
+  <div class="w">
+    <span class="sec-label reveal">§ II. &nbsp; Philosophy</span>
+    <h2 class="reveal">Eleven Principles. One Discipline.</h2>
+    <p class="sec-intro reveal">The reasoning foundations behind the core rules. Read these to understand why the rules are written the way they are.</p>
+    <div class="principles">
+      <div class="principle">
+        <span class="pnum-col">P.1</span>
+        <div class="principle-body">
+          <h3>Read-First</h3>
+          <p>The codebase is a living document. Every assumption about what exists or what a function does is wrong until verified by reading. The only correct prior is zero.</p>
+        </div>
+      </div>
+      <div class="principle">
+        <span class="pnum-col">P.2</span>
+        <div class="principle-body">
+          <h3>Minimum Surface Area</h3>
+          <p>Every file you touch is a file that can break. Risk is proportional to how many files are affected. Constrain the blast radius of every operation.</p>
+        </div>
+      </div>
+      <div class="principle">
+        <span class="pnum-col">P.3</span>
+        <div class="principle-body">
+          <h3>Complete Execution</h3>
+          <p>Partial execution is worse than no execution. A half-removed feature leaves a corrupted codebase. If you cannot finish, stop and report exactly where you stopped and what remains.</p>
+        </div>
+      </div>
+      <div class="principle">
+        <span class="pnum-col">P.4</span>
+        <div class="principle-body">
+          <h3>Exact Scope</h3>
+          <p>The user defines what to do. You do that. Nothing else. Unsolicited changes are damage — even correct, well-intentioned ones buried in the diff.</p>
+        </div>
+      </div>
+      <div class="principle">
+        <span class="pnum-col">P.5</span>
+        <div class="principle-body">
+          <h3>Keep It Simple</h3>
+          <p>The simplest solution that correctly handles all required cases. Not the shortest code. The code that is most obvious to the next person who reads it — including a future session with no context.</p>
+        </div>
+      </div>
+      <div class="principle">
+        <span class="pnum-col">P.6</span>
+        <div class="principle-body">
+          <h3>You Ain't Gonna Need It</h3>
+          <p>Build what is asked for. Not what might be needed later. Every "future-proof" addition is a guess about the future, and it is usually wrong. If the requirement changes, the code can change then.</p>
+        </div>
+      </div>
+      <div class="principle">
+        <span class="pnum-col">P.7</span>
+        <div class="principle-body">
+          <h3>DRY — Applied Correctly</h3>
+          <p>Do not repeat yourself after the third occurrence. On the third, extract. On the second, note it. On the first, write it straight. Two occurrences might be coincidental.</p>
+        </div>
+      </div>
+      <div class="principle">
+        <span class="pnum-col">P.8</span>
+        <div class="principle-body">
+          <h3>Truth Over Completeness</h3>
+          <p>An honest incomplete report is worth more than a dishonest complete one. When a model reports done, developers stop looking. That silence is where bugs hide.</p>
+        </div>
+      </div>
+      <div class="principle">
+        <span class="pnum-col">P.9</span>
+        <div class="principle-body">
+          <h3>Reversibility</h3>
+          <p>Prefer reversible decisions over irreversible ones. Create before delete, not delete then create. Add the new interface before removing the old one.</p>
+        </div>
+      </div>
+      <div class="principle">
+        <span class="pnum-col">P.10</span>
+        <div class="principle-body">
+          <h3>Code as Communication</h3>
+          <p>Every agent reads the codebase cold. Write for that reader. A function named <code>process()</code> that works perfectly is a liability — the next session will not know what it processes.</p>
+        </div>
+      </div>
+      <div class="principle">
+        <span class="pnum-col">P.11</span>
+        <div class="principle-body">
+          <h3>External Contract Fidelity</h3>
+          <p>When integrating with an external system, the external contract is fixed. You adapt to it. Integrate directly. Use the system's actual types and shapes. No speculative wrappers.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider reveal-fade">· · ·</div>
+
+<!-- ═══════════ RULES ═══════════ -->
+<section id="rules">
+  <div class="w">
+    <span class="sec-label reveal">§ III. &nbsp; Core Rules</span>
+    <h2 class="reveal">18 Rules. No Exceptions. <span class="stamp">Mandatory</span></h2>
+    <p class="sec-intro reveal">These apply to every task, every scenario, every operation. No context makes them inapplicable — not urgency, not simplicity.</p>
+    <div class="rules">
+      <div class="rule">
+        <span class="rid">R01</span>
+        <div class="rule-body">
+          <p class="rule-name">Read Before Write</p>
+          <p>Before modifying, creating, or deleting any file, read that file completely. Before modifying a function, read every file that imports it. Reading is not optional and is not a skim.</p>
+        </div>
+      </div>
+      <div class="rule">
+        <span class="rid">R02</span>
+        <div class="rule-body">
+          <p class="rule-name">Codebase Is Source of Truth</p>
+          <p>What exists in the files is what is true. Not what you expect based on the framework, not what is typical. Never assume a file's contents from its name.</p>
+        </div>
+      </div>
+      <div class="rule">
+        <span class="rid">R03</span>
+        <div class="rule-body">
+          <p class="rule-name">Exact Scope</p>
+          <p>Do exactly what was asked. Nothing more. If you notice something adjacent that needs attention: list it in the report, do not touch it.</p>
+        </div>
+      </div>
+      <div class="rule">
+        <span class="rid">R04</span>
+        <div class="rule-body">
+          <p class="rule-name">Complete Removal or No Removal</p>
+          <p>There is no partial removal. Remove the implementation, every import, every type, every test, every route, every config key. Feature flags set to false are not removal. Commented-out code is not removal.</p>
+        </div>
+      </div>
+      <div class="rule">
+        <span class="rid">R05</span>
+        <div class="rule-body">
+          <p class="rule-name">State Every Assumption</p>
+          <p>Before building anything involving architecture, data shape, auth strategy, or file structure: state your assumption explicitly. Never make a structural decision silently.</p>
+        </div>
+      </div>
+      <div class="rule">
+        <span class="rid">R06</span>
+        <div class="rule-body">
+          <p class="rule-name">Match Existing Patterns</p>
+          <p>Before writing code, identify naming conventions, file structure, error handling, state management, and import style in use. Use what is already there. Do not introduce a competing pattern.</p>
+        </div>
+      </div>
+      <div class="rule">
+        <span class="rid">R07</span>
+        <div class="rule-body">
+          <p class="rule-name">Minimum Change</p>
+          <p>The correct solution is the smallest change that correctly solves the problem. Not the most elegant. Not the most impressive. The smallest.</p>
+        </div>
+      </div>
+      <div class="rule">
+        <span class="rid">R08</span>
+        <div class="rule-body">
+          <p class="rule-name">No Abstraction Under Three</p>
+          <p>Do not extract a shared function, base class, or utility until the pattern appears in at least three concrete use cases. Before the third occurrence, duplication is cheaper than premature abstraction.</p>
+        </div>
+      </div>
+      <div class="rule">
+        <span class="rid">R09</span>
+        <div class="rule-body">
+          <p class="rule-name">No Unrequested Dependencies</p>
+          <p>Before adding any library: check if the functionality exists in current dependencies. Never add a library to use one function from it when that function can be written in ten lines.</p>
+        </div>
+      </div>
+      <div class="rule">
+        <span class="rid">R10</span>
+        <div class="rule-body">
+          <p class="rule-name">Honest Completion</p>
+          <p>When reporting done, state what is fully complete, what is partial, what is missing, what edge cases are unhandled. "Done" without this breakdown is a lie.</p>
+        </div>
+      </div>
+      <div class="rule">
+        <span class="rid">R11</span>
+        <div class="rule-body">
+          <p class="rule-name">Surface Ambiguity First</p>
+          <p>If an instruction has two or more valid interpretations: state them, state which one you will use, and ask for confirmation. Do not pick one silently and build on it.</p>
+        </div>
+      </div>
+      <div class="rule">
+        <span class="rid">R12</span>
+        <div class="rule-body">
+          <p class="rule-name">Verify Removal with Search</p>
+          <p>After completing any removal, search the codebase for the removed feature's name and related functions. If any results remain, the removal is not complete.</p>
+        </div>
+      </div>
+      <div class="rule">
+        <span class="rid">R13</span>
+        <div class="rule-body">
+          <p class="rule-name">Check Before Creating</p>
+          <p>Before creating any new file or function, search for files or functions with the same name or purpose. Duplicates are a form of scope damage even when they work correctly.</p>
+        </div>
+      </div>
+      <div class="rule">
+        <span class="rid">R14</span>
+        <div class="rule-body">
+          <p class="rule-name">No Silent Breaking Changes</p>
+          <p>If a change modifies a shared function's signature, a type's shape, or any interface consumed by more than one file: list every consumer that will be affected and confirm before proceeding.</p>
+        </div>
+      </div>
+      <div class="rule">
+        <span class="rid">R15</span>
+        <div class="rule-body">
+          <p class="rule-name">Overrides Are Explicit</p>
+          <p>No context makes these rules inapplicable by default. To bypass a rule, the user must issue the <code>OVERRIDE [Rule Number]</code> command. The agent never decides to skip a rule on its own.</p>
+        </div>
+      </div>
+      <div class="rule">
+        <span class="rid">R16</span>
+        <div class="rule-body">
+          <p class="rule-name">Tests Are Non-Optional</p>
+          <p>Any function or feature you write must have at least one test for the happy path and one for the failure case. An implementation without tests is a partial implementation.</p>
+        </div>
+      </div>
+      <div class="rule">
+        <span class="rid">R17</span>
+        <div class="rule-body">
+          <p class="rule-name">One Question, Not Five</p>
+          <p>Do not respond to ambiguity with a list of questions. Identify the single most important ambiguity, resolve it, and proceed. Asking five questions is worse than proceeding with a stated assumption.</p>
+        </div>
+      </div>
+      <div class="rule">
+        <span class="rid">R18</span>
+        <div class="rule-body">
+          <p class="rule-name">Propose, Do Not Ask Open-Endedly</p>
+          <p><em>"I'll use the existing JWT setup for this feature. If you wanted a different approach, tell me."</em> Proposals are faster to respond to than open questions.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider reveal-fade">— ❦ —</div>
+
+<!-- ═══════════ MODES ═══════════ -->
+<section id="modes">
+  <div class="w">
+    <span class="sec-label reveal">§ IV. &nbsp; Operating Modes</span>
+    <h2 class="reveal">Speed vs. Safety.</h2>
+    <p class="sec-intro reveal">Toggle at the start of any session based on the risk level of your work. Interactive by default.</p>
+    <div class="telegram-row">
+      <div class="telegram-box" data-label="═ Default ═">
+        <h3>Interactive</h3>
+        <p>Strict gating. Stops and confirms before every structural change or ambiguity. Recommended for production systems and high-risk codebases.</p>
+      </div>
+      <div class="telegram-box" data-label="═ Fast ═">
+        <h3>Autonomous</h3>
+        <p>Reduced gating. Proceeds on stated assumptions. Only stops for deletions and architectural decisions. Activate with <em>"Proceed autonomously"</em> or <em>"Just do it."</em></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider reveal-fade">· · ·</div>
+
+<!-- ═══════════ GET STARTED ═══════════ -->
+<section id="start">
+  <div class="w">
+    <span class="sec-label reveal">§ V. &nbsp; Get Started</span>
+    <h2 class="reveal">Give Your Agent a Backbone.</h2>
+    <p class="sec-intro reveal">Two ways to install. One prompt to activate.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">I</div>
+        <div class="step-content">
+          <h3>Clone the Repository</h3>
+          <p>Add Scalpel to your project or your agent's skills directory.</p>
+          <div class="code-block"><span class="kw">git clone</span> https://github.com/Harshil-Anuwadia/scalpel-sop.git</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">II</div>
+        <div class="step-content">
+          <h3>Or Upload Directly</h3>
+          <p>Download <code>scalpel-sop.zip</code> from the releases page and upload it to your project knowledge base. No setup needed.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">III</div>
+        <div class="step-content">
+          <h3>Initialize with a Prompt</h3>
+          <p>At the start of any session, point your agent to the initialization file.</p>
+          <div class="code-block"><span class="cm"># Example prompt:</span>
+
+Initialize the Scalpel SOP by reading <span class="kw">SKILL.md</span>.
+Then remove the old billing module.
+Proceed autonomously.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer>
+  <div class="w">
+    <div class="wax-seal" aria-hidden="true"></div>
+    <span class="footer-ornament">❦ &nbsp; ❦ &nbsp; ❦</span>
+    <p class="colophon-text">Scalpel &nbsp;·&nbsp; SOP Framework &nbsp;·&nbsp; by <a href="https://github.com/Harshil-Anuwadia" target="_blank">Harshil Anuwadia</a></p>
+    <p class="colophon-text">Open Source &nbsp;·&nbsp; Apache 2.0</p>
+    <p class="colophon-legal">This document may be freely reproduced and distributed.</p>
+  </div>
+</footer>
+
+</div> <!-- end page-wrapper -->
+
+<!-- Link to external JS -->
+<script src="scalpel2.js"></script>
+
+</body>
+</html>
